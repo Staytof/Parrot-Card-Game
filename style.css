@@ -1,0 +1,13 @@
+body {
+    background-color: #eef9bf;
+    font-family: 'Roboto', sans-serif;
+}
+
+header {
+    color: #75B79E;
+    font-size: 56px;
+    font-weight: 700;
+    line-height: 65.63px;
+    text-align: center;
+    margin-top: 40px;
+}
