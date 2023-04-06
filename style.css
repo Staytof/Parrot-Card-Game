@@ -18,6 +18,18 @@ header {
     margin-top: 40px;
 }
 
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    gap: 34px;
+}
+
+.table {
+    padding: 47px 122px 0 123px;
+    display: flex;
+    justify-content: space-between;
+}
+
 .card {
     width: 200px;
     height: 250px;
@@ -38,6 +50,7 @@ header {
     transition: all .5s;
     transform-style: preserve-3d;
 }
+
 
 .back-face {
     transform: rotateY(180deg);
