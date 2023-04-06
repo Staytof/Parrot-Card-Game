@@ -26,8 +26,6 @@ header {
 
 .table {
     padding: 47px 122px 0 123px;
-    display: flex;
-    justify-content: space-between;
 }
 
 .card {
@@ -49,17 +47,14 @@ header {
     backface-visibility: hidden;
     transition: all .5s;
     transform-style: preserve-3d;
+    pointer-events: none;
 }
 
+.face img {
+    width: 150px;
+    height: 150px;
+}
 
 .back-face {
     transform: rotateY(180deg);
-}
-
-.card:hover .back-face {
-    transform: rotateY(0deg);
-}
-
-.card:hover .front-face {
-    transform: rotateY(-180deg);
 }
