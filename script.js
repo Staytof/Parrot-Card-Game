@@ -1,3 +1,9 @@
+let numCards = parseInt(prompt('Com quantas cartas você quer jogar? (Digite um número par entre 4 e 14)', ''));
+
+while (isNaN(numCards) || numCards % 2 !== 0 || numCards < 4 || numCards > 14) {
+    numCards = parseInt(prompt('Número inválido. Com quantas cartas você quer jogar? (Digite um número par entre 4 e 14)', ''));
+}
+
 const grid = document.querySelector('.grid');
 const parrots = [
     'bobrossparrot',
@@ -46,11 +52,5 @@ const loadGame = (numCards) => {
         grid.appendChild(card);
     });
 };
-
-let numCards = parseInt(prompt('Com quantas cartas você quer jogar? (Digite um número par entre 4 e 14)', '8'));
-
-while (isNaN(numCards) || numCards % 2 !== 0 || numCards < 4 || numCards > 14) {
-    numCards = parseInt(prompt('Número inválido. Com quantas cartas você quer jogar? (Digite um número par entre 4 e 14)', '8'));
-}
 
 loadGame(numCards);
