@@ -59,6 +59,8 @@ const checkCardsMatch = () => {
             flipBackCards(card1, card2);
         }, 1000);
     }
+
+    checkGameWon();
 };
 
 const flipBackCards = (card1, card2) => {
@@ -97,7 +99,22 @@ const flipCard = (event) => {
             checkCardsMatch();
         }
     }
+
+    jogadas++;
 };
+
+//Função de jogo ganho
+
+let jogadas = 0;
+
+const checkGameWon = () => {
+    const cards = document.querySelectorAll('.card');
+    const flippedCardsCount = document.querySelectorAll('.flipped').length;
+    if (flippedCardsCount === cards.length) {
+        alert(`Você ganhou em ${jogadas} jogadas!`);
+    }
+};
+
 
 //Função geral e loadgame();
 
