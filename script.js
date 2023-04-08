@@ -19,6 +19,8 @@ const parrots = [
     'unicornparrot'
 ];
 
+let flippedCards = [];
+
 //Função para criar as cartas no HTML
 
 const createCard = (parrot) => {
@@ -40,27 +42,42 @@ const createCard = (parrot) => {
     card.appendChild(front);
     card.appendChild(back);
 
-    card.addEventListener('click', revealCard);
+    card.addEventListener('click', flipCard);
 
     return card;
+};
+
+const checkCardsMatch = () => {
+    const [card1, card2] = flippedCards;
+    const img1 = card1.querySelector('.back-face img').src;
+    const img2 = card2.querySelector('.back-face img').src;
+
+    if (img1 === img2) {
+        flippedCards = [];
+    } else {
+        setTimeout(() => {
+            flipBackCards(card1, card2);
+        }, 1000);
+    }
+};
+
+const flipBackCards = (card1, card2) => {
+    card1.classList.remove('flipped');
+    card2.classList.remove('flipped');
+    flippedCards = [];
 };
 
 //Função para virar as cartas
 
 const revealCard = (event) => {
-    const card = event.target;
-    const frontFace = card.querySelector('.front-face');
-    const backFace = card.querySelector('.back-face');
-    const frontImg = frontFace.querySelector('img');
-    const backImg = backFace.querySelector('img');
+    const card = event.currentTarget;
+    card.classList.toggle('fliped');
+    flippedCards.push(card);
 
-    frontFace.style.pointerEvents = 'auto';
-    backFace.style.pointerEvents = 'auto';
-
-    frontImg.src = backImg.src;
-    backImg.src = frontImg.src;
+    if (flippedCards.length === 2) {
+        checkCardsMatch();
+    }
 };
-
 
 //Função para embaralhar as cartas
 
@@ -68,26 +85,34 @@ const comparador = () => {
     return Math.random() - 0.5;
 };
 
+//Função para deixar as cartas viradas
+
 const flipCard = (event) => {
     const card = event.currentTarget;
-    card.classList.add('flipped');
+    if (!card.classList.contains('flipped') && flippedCards.length < 2) {
+        card.classList.add('flipped');
+        flippedCards.push(card);
+
+        if (flippedCards.length === 2) {
+            checkCardsMatch();
+        }
+    }
 };
+
+//Função geral e loadgame();
 
 const loadGame = (numCards) => {
     grid.innerHTML = '';
+    flippedCards = [];
 
     const selectedParrots = parrots.sort(comparador).slice(0, numCards / 2);
     const parrotsDuplicates = [...selectedParrots, ...selectedParrots];
     parrotsDuplicates.sort(comparador).forEach((parrot) => {
         const card = createCard(parrot);
-        card.addEventListener('click', flipCard);
-        card.addEventListener('click', (event) => {
-            setTimeout(() => {
-                flipCard(event);
-            }, 1000);
-        });
         grid.appendChild(card);
     });
 };
+
+
 
 loadGame(numCards);

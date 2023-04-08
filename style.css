@@ -55,6 +55,20 @@ header {
     height: 150px;
 }
 
+.front-face {
+    transform: rotateY(0deg);
+}
+
 .back-face {
-    transform: rotateX(180deg);
+    transform: rotateY(180deg);
+}
+
+.flipped .front-face {
+    transform: rotateY(-180deg);
+    transition: transform 0.5s ease-out;
+}
+
+.flipped .back-face {
+    transform: rotateY(0deg);
+    transition: transform 0.5s ease-out;
 }
